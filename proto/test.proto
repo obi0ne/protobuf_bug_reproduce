@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package test_me;
+
+message State_Data {
+  repeated float myVector = 1;
+  }
