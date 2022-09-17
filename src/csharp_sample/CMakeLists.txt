@@ -1,7 +1,21 @@
 project(csharp_sample LANGUAGES CSharp )
 
+# generate PROTO files via CMD
+find_program(CMD_EXE NAMES cmd)
+if(NOT CMD_EXE)
+	message("cmd.EXE not found.")
+	message(FATAL_ERROR "Please locate CMD executable, and run CMake again.")
+else()
+	message(STATUS "about to generate proto source from schema, hold on...")
+	
+	execute_process(
+		COMMAND cmd /C "${CMAKE_CURRENT_SOURCE_DIR}/../../Scripts/generate_proto_files_csharp.bat"
+	)
+endif()
+
 set(SOURCES	
 	main.cs
+	proto_gen_files/Test.cs	
 	)
 
 add_executable(csharp_sample ${SOURCES})
@@ -18,6 +32,10 @@ else()
 	
 	exec_program(${NUGET_EXE}
     ARGS install Google.Protobuf -Version 3.21.4 -OutputDirectory ${CMAKE_BINARY_DIR}/packages)
+	
+	exec_program(${NUGET_EXE}
+    ARGS install System.Runtime.CompilerServices.Unsafe -Version 4.5.2 -OutputDirectory ${CMAKE_BINARY_DIR}/packages)
+	
 	
 endif()
 
@@ -41,4 +59,9 @@ set_property(TARGET csharp_sample PROPERTY VS_DOTNET_REFERENCES
 set_property(TARGET csharp_sample PROPERTY 
     VS_DOTNET_REFERENCE_Google.Protobuf 
     ${CMAKE_BINARY_DIR}/packages/Google.Protobuf.3.21.4/lib/net45/Google.Protobuf.dll
+)
+
+set_property(TARGET csharp_sample PROPERTY 
+    VS_DOTNET_REFERENCE_System.Runtime.CompilerServices.Unsafe 
+    ${CMAKE_BINARY_DIR}/packages/System.Runtime.CompilerServices.Unsafe.4.5.2/lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll
 )

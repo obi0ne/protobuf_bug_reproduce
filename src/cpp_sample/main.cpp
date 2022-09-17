@@ -22,7 +22,6 @@ int main(int argc, char* argv[])
 
 	size_t buf_size = buf.size();
 	std::ofstream outfile("serialized_state_obj.bin", std::ofstream::binary);
-	outfile.write((char*)&buf_size, sizeof(buf_size));
 	outfile.write(&buf[0], buf_size);
 	outfile.close();
 

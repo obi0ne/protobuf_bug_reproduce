@@ -11,7 +11,7 @@ else()
 	message(STATUS "about to generate proto source from schema, hold on...")
 	
 	execute_process(
-		COMMAND cmd /C "${CMAKE_CURRENT_SOURCE_DIR}/../../Scripts/generate_proto_files.bat"
+		COMMAND cmd /C "${CMAKE_CURRENT_SOURCE_DIR}/../../Scripts/generate_proto_files_cpp.bat"
 	)
 endif()
 
