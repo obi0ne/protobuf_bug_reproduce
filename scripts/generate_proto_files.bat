@@ -5,7 +5,7 @@ set SRC_DIR=%BATCH_ORIG_DIR%..\src\cpp_sample\
 set OUT_DIR=%SRC_DIR%proto_gen_files\
 set PROTO_EXE_DIR=%BATCH_ORIG_DIR%..\src\dependencies\bin\
 
-cd %SRC_DIR%
+cd /d %SRC_DIR%
 mkdir proto_gen_files
 
 cd %PROTO_EXE_DIR%

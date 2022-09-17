@@ -26,3 +26,5 @@ add_executable (cpp_sample ${SOURCE_FILES})
 
 target_link_libraries (cpp_sample PUBLIC
  CONAN_PKG::protobuf)
+ 
+target_include_directories(cpp_sample PUBLIC proto_gen_files/)
